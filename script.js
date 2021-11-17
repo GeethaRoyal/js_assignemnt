@@ -1,5 +1,22 @@
-import data from "./quotes.json"
-console.log(data)
+console.log("Holaaaaaaaaaaaaaa")
+let p = new Promise((resolve, reject) => {
+    let h1 = document.getElementsByTagName('h1')[0];
+    h1 = ""
+    if (h1) {
+        h1.innerHTML = "Welcome";
+        resolve("Success")
+    } else {
+        h1.innerHTML = "Something went wrong";
+        reject("Something went wrong")
+    }
+})
+
+
+p.then(message => {
+    console.log('This is in the then ' + message)
+}).catch(message => {
+    console.log('This is in the catch ' + message)
+})
 
 function validateFunc() {
     var name = document.forms["login-form"]["name"];
@@ -12,54 +29,59 @@ function validateFunc() {
     var regularExpression = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
 
     if (name.value == "") {
-        window.alert("Please enter your name.");
+        alert("Please enter your name.");
         name.focus();
         return false;
     }
 
     if (email.value == "") {
-        window.alert(
+        alert(
             "Please enter a valid e-mail address.");
         email.focus();
         return false;
     }
 
     if (phone.value == "" || phone.value.length < 10) {
-        window.alert(
+        alert(
             "Please enter valid phone number");
         phone.focus();
         return false;
     }
 
-    if (password.length < minNumberofChars || password.length > maxNumberofChars) {
+    if (password.value.length < minNumberofChars || password.value.length > maxNumberofChars) {
+        alert("password should be between 8 to 16 characters");
+        password.focus();
         return false;
     }
-    if (!regularExpression.test(password)) {
+    if (!regularExpression.test(password.value)) {
         alert("password should contain atleast one capital letter, one number and one special character");
+        password.focus();
         return false;
     }
 
     if (dob.value == "") {
         window.alert("Please enter valid date of birth.");
-        address.focus();
+        dob.focus();
         return false;
     }
     return True
 }
 
-let p = new Promise((resolve, reject) => {
-    if (validateFunc()) {
-
-    } else {
-
-    }
-
-
-})
 
 
 class UI {
     static displayQuote() {
+        const data = [{
+                    "quote": "Life isn’t about getting and having, it’s about giving and being.",
+                    "author": "Kevin Kruse"
+                },
+                {
+                    "quote": "Whatever the mind of man can conceive and believe, it can achieve.",
+                    "author": "Napoleon Hill"
+
+                }
+            ]
+            // const data = require("./quotes.json");
         console.log(data);
         data.forEach(quote => UI.addQuoteToList(quote))
     }
@@ -74,4 +96,4 @@ class UI {
     }
 }
 
-document.addEventListener('DOMContentLoaded', UI.displayQuote())
+document.addEventListener('DOMContentLoaded', UI.displayQuote)
